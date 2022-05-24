@@ -26,9 +26,6 @@ class QnaServiceTest {
     private QuestionRepository questionRepository;
 
     @Mock
-    private AnswerRepository answerRepository;
-
-    @Mock
     private DeleteHistoryService deleteHistoryService;
 
     @InjectMocks
@@ -86,8 +83,8 @@ class QnaServiceTest {
 
     private void verifyDeleteHistories() {
         List<DeleteHistory> deleteHistories = Arrays.asList(
-                new DeleteHistory(ContentType.QUESTION, question.getId(), question.getWriter(), question.getUpdatedAt()),
-                new DeleteHistory(ContentType.ANSWER, answer.getId(), answer.getWriter(), answer.getUpdatedAt())
+                DeleteHistory.of(question),
+                DeleteHistory.of(answer)
         );
         verify(deleteHistoryService).saveAll(deleteHistories);
     }

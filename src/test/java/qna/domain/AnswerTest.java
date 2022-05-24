@@ -26,10 +26,7 @@ public class AnswerTest {
     @DisplayName("답변을 삭제하면 삭제 여부는 true 가 되고, 삭제히스토리를 생성한다.")
     void delete_test() throws CannotDeleteException {
         DeleteHistory actual = A1.delete(UserTest.JAVAJIGI);
-        DeleteHistory expected = new DeleteHistory(ContentType.ANSWER,
-                A1.getId(),
-                A1.getWriter(),
-                A1.getUpdatedAt());
+        DeleteHistory expected = DeleteHistory.of(A1);
         assertAll(
                 () -> assertThat(actual).isEqualTo(expected),
                 () -> assertThat(A1.isDeleted()).isTrue()
